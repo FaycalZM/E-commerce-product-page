@@ -1,6 +1,6 @@
 
 import { useCartContext } from '../context/CartContextProvider'
-import { CartItem, CartActions, ProductsActions, ProductType } from '../types/Types'
+import { CartActions, ProductsActions, ProductType } from '../types/Types'
 import { CartIcon, MinusIcon, PlusIcon } from './Icons'
 import Thumbnail from './Thumbnail'
 
@@ -14,19 +14,26 @@ const Product = ({
     discount,
     quantity,
     images,
+    currentImageIndex
 }: ProductType) => {
     const { dispatchProducts, dispatchCart } = useCartContext();
     return (
         <article className="flex gap-36 items-center justify-center mb-12">
             <div className="w-[40%]">
                 <img
-                    className=" w-full rounded-xl"
-                    src={images.large[0]}
+                    className=" w-full rounded-xl cursor-pointer"
+                    src={images.large[currentImageIndex]}
                     alt="product image" />
                 <div className="flex justify-between mt-8">
                     {
                         images.thumbnails.map(
-                            (thumbnail) => <Thumbnail thumbnailURL={thumbnail} />
+                            (thumbnail, index) => <Thumbnail
+                                key={index}
+                                thumbnailURL={thumbnail}
+                                productID={id}
+                                index={index}
+                                currentImageIndex={currentImageIndex}
+                            />
                         )
                     }
                 </div>

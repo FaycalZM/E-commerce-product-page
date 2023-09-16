@@ -30,6 +30,17 @@ const ProductsReducer = (products: Array<ProductType>, action: ProductsAction) =
             })
 
         }
+        case 'SELECT_IMAGE': {
+            return products.map(product => {
+                if (product.id === action.payload.id) {
+                    return {
+                        ...product,
+                        currentImageIndex: action.payload.index
+                    }
+                }
+                else return product;
+            })
+        }
         default: {
             return [...products];
         }

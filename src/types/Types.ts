@@ -15,6 +15,7 @@ export interface CartAction {
 export enum ProductsActions {
     PLUS_ONE_ITEM = 'PLUS_ONE_ITEM',
     MINUS_ONE_ITEM = 'MINUS_ONE_ITEM',
+    SELECT_IMAGE = 'SELECT_IMAGE',
 }
 export interface ProductsAction {
     type: ProductsActions;

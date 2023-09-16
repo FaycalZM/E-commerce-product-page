@@ -21,12 +21,17 @@ const Header = () => {
                 <Navbar />
             </div>
             <div className='flex items-center gap-8'>
-                <button onClick={() => {
-                    dispatchCart({
-                        type: CartActions.TOGGLE_CART,
-                        payload: null
-                    })
-                }}>
+                <button
+                    className='relative'
+                    onClick={() => {
+                        dispatchCart({
+                            type: CartActions.TOGGLE_CART,
+                            payload: null
+                        })
+                    }}>
+                    <div className='bg-primary-orange text-white rounded-lg text-xs absolute w-full -translate-y-2 translate-x-2 z-10'>
+                        {cartData.cartItems.length}
+                    </div>
                     <CartIcon color={"#69707D"} />
                 </button>
                 <Avatar imageURL='/images/image-avatar.png' />
