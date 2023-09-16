@@ -8,9 +8,9 @@ import Navbar from './Navbar'
 import Logo from '/icons/logo.svg'
 
 const Header = () => {
-    const { cartData, dispatch } = useCartContext();
+    const { cartData, dispatchCart } = useCartContext();
     return (
-        <header className='flex justify-between items-center border-b-[1px]  '>
+        <header className='flex justify-between items-center border-b-[1px] relative '>
             <div className='flex items-center gap-16'>
                 <a href="/">
                     <img
@@ -20,21 +20,19 @@ const Header = () => {
                 </a>
                 <Navbar />
             </div>
-            <div className='flex items-center gap-8 relative'>
+            <div className='flex items-center gap-8'>
                 <button onClick={() => {
-                    dispatch({
+                    dispatchCart({
                         type: CartActions.TOGGLE_CART,
                         payload: null
                     })
                 }}>
                     <CartIcon color={"#69707D"} />
                 </button>
-
                 <Avatar imageURL='/images/image-avatar.png' />
                 {
                     cartData.isVisible ? <Cart /> : null
                 }
-
             </div>
         </header>
     )

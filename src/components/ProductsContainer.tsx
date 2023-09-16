@@ -1,15 +1,15 @@
-import { useCartContext } from "../context/CartContextProvider"
 import Product from "./Product";
+import { useCartContext } from "../context/CartContextProvider";
 
 
 const ProductsContainer = () => {
-    const { cartData } = useCartContext();
+    const { products } = useCartContext();
     return (
         <section className="pt-16">
             {
-                cartData.cartItems.length
-                    ? cartData.cartItems.map((cartItem) => {
-                        return <Product key={cartItem.id} {...cartItem} />
+                products.length
+                    ? products.map((product) => {
+                        return <Product key={product.id} {...product} />
                     })
                     : <h1>No data</h1>
             }

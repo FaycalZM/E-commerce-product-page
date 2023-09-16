@@ -1,21 +1,53 @@
-import { Cart, CartAction } from "../types/Types";
+import { Cart, CartAction, CartItem } from "../types/Types";
 
 
-
+const searchById = (cartItems: Array<CartItem>, id: number) => {
+    let foundItem = false;
+    for (const cartItem of cartItems) {
+        if (cartItem.id === id) {
+            foundItem = true;
+            break;
+        }
+    }
+    return foundItem;
+}
 
 const CartReducer = (cart: Cart, action: CartAction): Cart => {
     switch (action.type) {
-        case 'PLUS_ONE_ITEM': {
-            return { ...cart };
-        };
-        case 'MINUS_ONE_ITEM': {
-            return { ...cart };
-        }
         case 'ADD_ITEM_TO_CART': {
-            return { ...cart };
+            let itemExists = searchById(cart.cartItems, action.payload.item.id);
+            if (!itemExists) {
+                return {
+                    ...cart,
+                    cartItems: [
+                        ...cart.cartItems,
+                        action.payload.item
+                    ]
+                }
+            }
+            else {
+                return {
+                    ...cart,
+                    cartItems: cart.cartItems.map(cartItem => {
+                        if (cartItem.id === action.payload.item.id) {
+                            return {
+                                ...cartItem,
+                                quantity: cartItem.quantity + action.payload.item.quantity
+                            };
+                        }
+                        else {
+                            return cartItem;
+                        }
+                    })
+                }
+            }
+
         }
         case 'REMOVE_ITEM_FROM_CART': {
-            return { ...cart };
+            return {
+                ...cart,
+                cartItems: cart.cartItems.filter(cartItem => cartItem.id !== action.payload.id)
+            }
         }
         case 'TOGGLE_CART': {
             return {

@@ -2,8 +2,6 @@ import React from "react";
 
 
 export enum CartActions {
-    PLUS_ONE_ITEM = 'PLUS_ONE_ITEM',
-    MINUS_ONE_ITEM = 'MINUS_ONE_ITEM',
     ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
     REMOVE_ITEM_FROM_Cart = 'REMOVE_ITEM_FROM_CART',
     TOGGLE_CART = 'TOGGLE_CART',
@@ -14,13 +12,24 @@ export interface CartAction {
     payload: any;
 }
 
+export enum ProductsActions {
+    PLUS_ONE_ITEM = 'PLUS_ONE_ITEM',
+    MINUS_ONE_ITEM = 'MINUS_ONE_ITEM',
+}
+export interface ProductsAction {
+    type: ProductsActions;
+    payload: any;
+}
+
 export type AvatarProps = {
     imageURL: string;
 }
 
 export type CartContextType = {
     cartData: Cart;
-    dispatch: React.Dispatch<CartAction>;
+    dispatchCart: React.Dispatch<CartAction>;
+    products: Array<ProductType>;
+    dispatchProducts: React.Dispatch<ProductsAction>;
 }
 
 export type CartContextProviderProps = {
@@ -38,6 +47,14 @@ type ImagesType = {
 }
 
 export type CartItem = {
+    id: number;
+    productName: string;
+    currentPrice: number;
+    quantity: number;
+    image: string;
+}
+
+export type ProductType = {
     id: number;
     companyName: string;
     productName: string;

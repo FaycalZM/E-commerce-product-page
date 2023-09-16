@@ -1,7 +1,9 @@
-import { createContext, useContext, useReducer, useState } from "react";
-import { CartContextProviderProps, CartContextType, CartItem, Cart } from "../types/Types";
-import data from '../data/data.json'
+import { createContext, useContext, useReducer } from "react";
+import { CartContextProviderProps, CartContextType, Cart, ProductType } from "../types/Types";
 import CartReducer from "../reducers/CartReducer";
+import data from '../data/data.json'
+import ProductsReducer from "../reducers/ProductsReducer";
+
 
 const CartContext = createContext<CartContextType | null>(null);
 
@@ -15,17 +17,21 @@ export const useCartContext = () => {
 
 const CartInitialState: Cart = {
     isVisible: false,
-    cartItems: data,
+    cartItems: [],
 }
+
+const ProductsInitialState: Array<ProductType> = data;
 
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartData, dispatch] = useReducer(CartReducer, CartInitialState);
-
+    const [cartData, dispatchCart] = useReducer(CartReducer, CartInitialState);
+    const [products, dispatchProducts] = useReducer(ProductsReducer, ProductsInitialState);
     return (
         <CartContext.Provider value={{
             cartData,
-            dispatch
+            dispatchCart,
+            products,
+            dispatchProducts
         }}>
             {children}
         </CartContext.Provider>

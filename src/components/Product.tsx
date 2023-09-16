@@ -1,9 +1,11 @@
 
-import { CartItem } from '../types/Types'
+import { useCartContext } from '../context/CartContextProvider'
+import { CartItem, CartActions, ProductsActions, ProductType } from '../types/Types'
 import { CartIcon, MinusIcon, PlusIcon } from './Icons'
 import Thumbnail from './Thumbnail'
 
 const Product = ({
+    id,
     companyName,
     productName,
     description,
@@ -12,14 +14,14 @@ const Product = ({
     discount,
     quantity,
     images,
-    currentImageIndex,
-}: CartItem) => {
+}: ProductType) => {
+    const { dispatchProducts, dispatchCart } = useCartContext();
     return (
         <article className="flex gap-36 items-center justify-center mb-12">
             <div className="w-[40%]">
                 <img
                     className=" w-full rounded-xl"
-                    src={images.large[currentImageIndex]}
+                    src={images.large[0]}
                     alt="product image" />
                 <div className="flex justify-between mt-8">
                     {
@@ -55,15 +57,48 @@ const Product = ({
 
                 <div className="flex gap-6">
                     <div className="flex gap-8 py-3 px-4 bg-light-grayish-blue rounded-lg">
-                        <button className="hover:opacity-50 transition">
+                        <button
+                            onClick={() => {
+                                dispatchProducts({
+                                    type: ProductsActions.MINUS_ONE_ITEM,
+                                    payload: {
+                                        id: id
+                                    }
+                                });
+                            }}
+                            className="hover:opacity-50 transition">
                             <MinusIcon />
                         </button>
                         <p className="font-bold text-very-dark-blue">{quantity}</p>
-                        <button className="hover:opacity-50 transition">
+                        <button
+                            onClick={() => {
+                                dispatchProducts({
+                                    type: ProductsActions.PLUS_ONE_ITEM,
+                                    payload: {
+                                        id: id
+                                    }
+                                });
+                            }}
+                            className="hover:opacity-50 transition">
                             <PlusIcon />
                         </button>
                     </div>
-                    <button className="add-to-cart-btn flex gap-4 px-16 py-3 rounded-lg shadow-2xl shadow-primary-orange bg-primary-orange text-white capitalize hover:opacity-75 transition">
+                    <button
+                        onClick={() => {
+                            dispatchCart({
+                                type: CartActions.ADD_ITEM_TO_CART,
+                                payload: {
+                                    item: {
+                                        id,
+                                        productName,
+                                        currentPrice,
+                                        quantity,
+                                        image: images.thumbnails[0]
+                                    }
+                                }
+                            })
+                        }}
+                        className="add-to-cart-btn flex gap-4 px-16 py-3 rounded-lg shadow-2xl shadow-primary-orange bg-primary-orange text-white capitalize hover:opacity-75 transition">
                         <CartIcon color={null} />
                         add to cart
                     </button>
