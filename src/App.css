@@ -22,3 +22,7 @@
 svg {
     cursor: pointer;
 }
+
+.add-to-cart-btn>svg {
+    fill: white;
+}
