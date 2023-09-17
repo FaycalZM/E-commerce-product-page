@@ -15,7 +15,7 @@ type ThumbnailProps = {
 const Thumbnail = ({ thumbnailURL, index, productID, currentImageIndex, images }: ThumbnailProps) => {
     const { dispatchProducts, dispatchProductSlider } = useCartContext();
     const active = currentImageIndex === index ? true : false;
-    
+
     useEffect(() => {
         dispatchProductSlider({
             type: ProductSliderActions.UPDATE_SLIDER_PROPS,
@@ -41,7 +41,7 @@ const Thumbnail = ({ thumbnailURL, index, productID, currentImageIndex, images }
                 });
 
             }}
-            className={`w-24 h-24 border-4  ${active ? 'border-primary-orange' : 'border-transparent'} transition rounded-2xl cursor-pointer`}>
+            className={`w-24 border-4  ${active ? 'border-primary-orange' : 'border-transparent'} transition rounded-2xl cursor-pointer`}>
             <img
                 className={`rounded-xl hover:opacity-50 ${active ? 'opacity-50' : ''} transition`}
                 src={thumbnailURL} alt="thumbnail" />

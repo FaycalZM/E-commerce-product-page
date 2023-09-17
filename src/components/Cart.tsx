@@ -5,7 +5,7 @@ import CartProduct from "./CartProduct";
 const Cart = () => {
     const { cartData } = useCartContext();
     return (
-        <div className='py-6 min-w-[250px] w-fit bg-white absolute z-10 top-24 right-0 translate-x-1/3 shadow-2xl rounded-lg'>
+        <div className='py-6 min-w-[250px] w-fit bg-white absolute z-10 top-24 right-0 laptop:translate-x-1/3 shadow-xl rounded-lg'>
             <p className="px-6 font-bold">Cart</p>
             <hr className="w-full mt-4" />
             <div className="px-6 pt-6 flex flex-col justify-center items-center gap-8">

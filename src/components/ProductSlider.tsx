@@ -12,7 +12,7 @@ const ProductSlider = ({
     const { dispatchProductSlider } = useCartContext();
     return (
         <section className="fixed z-20 top-0 left-0 flex justify-center items-center h-full bg-black bg-opacity-75 w-full ">
-            <div className="w-[35%] p-6">
+            <div className="laptop:w-[35%] w-[85%] p-6">
                 <button
                     className="mb-6 text-center scale-125 w-fit h-fit"
                     onClick={() => {

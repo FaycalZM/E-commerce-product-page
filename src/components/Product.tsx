@@ -18,8 +18,8 @@ const Product = ({
 }: ProductType) => {
     const { dispatchProducts, dispatchCart, dispatchProductSlider } = useCartContext();
     return (
-        <article className="flex gap-36 items-center justify-center mb-12">
-            <div className="w-[40%]">
+        <article className="flex laptop:flex-row flex-col laptop:gap-36 gap-8 items-center justify-center mb-12">
+            <div className="laptop:w-[40%] w">
                 <img
                     onClick={() => {
                         dispatchProductSlider({
@@ -37,10 +37,10 @@ const Product = ({
                             }
                         });
                     }}
-                    className=" w-full rounded-xl cursor-pointer"
+                    className=" laptop:w-full w-3/4 mx-auto rounded-xl cursor-pointer"
                     src={images.large[currentImageIndex]}
                     alt="product image" />
-                <div className="flex justify-between mt-8">
+                <div className="flex laptop:justify-between justify-center items-center gap-8 mt-8">
                     {
                         images.thumbnails.map(
                             (thumbnail, index) => <Thumbnail
@@ -56,7 +56,7 @@ const Product = ({
                 </div>
             </div>
 
-            <div className="w-[40%] ">
+            <div className="laptop:w-[40%] w-3/4 laptop:text-left text-center">
                 <p className="text-primary-orange text-sm tracking-wider font-bold uppercase mb-6">
                     {companyName}
                 </p>
@@ -66,7 +66,7 @@ const Product = ({
                 <p className="text-dark-grayish-blue mb-6">
                     {description}
                 </p>
-                <p className="text-3xl font-bold text-very-dark-blue flex items-center mb-2">${currentPrice}
+                <p className="text-3xl font-bold text-very-dark-blue flex items-center laptop:justify-start justify-center mb-2">${currentPrice}
                     {
                         discount
                             ? <span className="h-fit px-2 py-[2px] ml-2 text-primary-orange text-base bg-pale-orange rounded-lg">{discount}</span>
@@ -79,8 +79,8 @@ const Product = ({
                         : null
                 }
 
-                <div className="flex gap-6">
-                    <div className="flex gap-8 py-3 px-4 bg-light-grayish-blue rounded-lg">
+                <div className="flex justify-center gap-6">
+                    <div className="flex gap-8 py-3 px-4 bg-light-grayish-blue rounded-lg items-center">
                         <button
                             onClick={() => {
                                 dispatchProducts({

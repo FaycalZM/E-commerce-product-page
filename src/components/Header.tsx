@@ -1,4 +1,3 @@
-
 import { useCartContext } from '../context/CartContextProvider'
 import { CartActions } from '../types/Types'
 import Avatar from './Avatar'
@@ -11,7 +10,7 @@ const Header = () => {
     const { cartData, dispatchCart } = useCartContext();
     return (
         <header className='flex justify-between items-center border-b-[1px] relative '>
-            <div className='flex items-center gap-16'>
+            <div className='flex items-center laptop:gap-16 gap-8'>
                 <a href="/">
                     <img
                         className='h-6 cursor-pointer'
@@ -20,7 +19,7 @@ const Header = () => {
                 </a>
                 <Navbar />
             </div>
-            <div className='flex items-center gap-8'>
+            <div className='flex items-center laptop:gap-8 gap-6'>
                 <button
                     className='relative'
                     onClick={() => {

@@ -7,7 +7,7 @@ import { useCartContext } from './context/CartContextProvider'
 function App() {
   const { productSlider } = useCartContext();
   return (
-    <main className='px-48 pb-12 font-kumbh-sans relative'>
+    <main className='laptop:px-48 tablet:px-10 pb-12 font-kumbh-sans relative'>
       <Header />
       <ProductsContainer />
       {
