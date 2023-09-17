@@ -1,8 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
-import { CartContextProviderProps, CartContextType, Cart, ProductType } from "../types/Types";
+import { CartContextProviderProps, CartContextType, Cart, ProductType, ProductSliderType } from "../types/Types";
 import CartReducer from "../reducers/CartReducer";
 import data from '../data/data.json'
 import ProductsReducer from "../reducers/ProductsReducer";
+import SliderReducer from "../reducers/SliderReducer";
 
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -18,20 +19,33 @@ export const useCartContext = () => {
 const CartInitialState: Cart = {
     isVisible: false,
     cartItems: [],
+    totalItems: 0,
 }
 
 const ProductsInitialState: Array<ProductType> = data;
+
+const ProductSliderInitialState: ProductSliderType = {
+    isVisible: false,
+    props: {
+        currentImageIndex: 0,
+        images: null,
+        productID: null
+    },
+}
 
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const [cartData, dispatchCart] = useReducer(CartReducer, CartInitialState);
     const [products, dispatchProducts] = useReducer(ProductsReducer, ProductsInitialState);
+    const [productSlider, dispatchProductSlider] = useReducer(SliderReducer, ProductSliderInitialState);
     return (
         <CartContext.Provider value={{
             cartData,
             dispatchCart,
             products,
-            dispatchProducts
+            dispatchProducts,
+            productSlider,
+            dispatchProductSlider,
         }}>
             {children}
         </CartContext.Provider>

@@ -5,6 +5,7 @@ export enum CartActions {
     ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
     REMOVE_ITEM_FROM_Cart = 'REMOVE_ITEM_FROM_CART',
     TOGGLE_CART = 'TOGGLE_CART',
+    UPDATE_TOTAL_ITEMS = 'UPDATE_TOTAL_ITEMS',
 }
 
 export interface CartAction {
@@ -22,6 +23,17 @@ export interface ProductsAction {
     payload: any;
 }
 
+export enum ProductSliderActions {
+    OPEN_SLIDER = 'OPEN_SLIDER',
+    CLOSE_SLIDER = 'CLOSE_SLIDER',
+    UPDATE_SLIDER_PROPS = 'UPDATE_SLIDER_PROPS',
+}
+
+export interface ProductSliderAction {
+    type: ProductSliderActions;
+    payload: any;
+}
+
 export type AvatarProps = {
     imageURL: string;
 }
@@ -31,6 +43,8 @@ export type CartContextType = {
     dispatchCart: React.Dispatch<CartAction>;
     products: Array<ProductType>;
     dispatchProducts: React.Dispatch<ProductsAction>;
+    productSlider: ProductSliderType;
+    dispatchProductSlider: React.Dispatch<ProductSliderAction>;
 }
 
 export type CartContextProviderProps = {
@@ -40,9 +54,10 @@ export type CartContextProviderProps = {
 export type Cart = {
     isVisible: boolean;
     cartItems: Array<CartItem>;
+    totalItems: number;
 }
 
-type ImagesType = {
+export type ImagesType = {
     large: Array<string>;
     thumbnails: Array<string>;
 }
@@ -66,4 +81,15 @@ export type ProductType = {
     quantity: number;
     images: ImagesType;
     currentImageIndex: number;
+}
+
+export type ProductSliderProps = {
+    currentImageIndex: number;
+    images: ImagesType | null;
+    productID: number | null;
+};
+
+export type ProductSliderType = {
+    isVisible: boolean;
+    props: ProductSliderProps;
 }

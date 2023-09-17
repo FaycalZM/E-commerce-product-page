@@ -1,6 +1,6 @@
 
 import { useCartContext } from '../context/CartContextProvider'
-import { CartActions, ProductsActions, ProductType } from '../types/Types'
+import { CartActions, ProductsActions, ProductSliderActions, ProductType } from '../types/Types'
 import { CartIcon, MinusIcon, PlusIcon } from './Icons'
 import Thumbnail from './Thumbnail'
 
@@ -16,11 +16,27 @@ const Product = ({
     images,
     currentImageIndex
 }: ProductType) => {
-    const { dispatchProducts, dispatchCart } = useCartContext();
+    const { dispatchProducts, dispatchCart, dispatchProductSlider } = useCartContext();
     return (
         <article className="flex gap-36 items-center justify-center mb-12">
             <div className="w-[40%]">
                 <img
+                    onClick={() => {
+                        dispatchProductSlider({
+                            type: ProductSliderActions.OPEN_SLIDER,
+                            payload: {}
+                        });
+                        dispatchProductSlider({
+                            type: ProductSliderActions.UPDATE_SLIDER_PROPS,
+                            payload: {
+                                props: {
+                                    currentImageIndex: currentImageIndex,
+                                    images: images,
+                                    productID: id,
+                                }
+                            }
+                        });
+                    }}
                     className=" w-full rounded-xl cursor-pointer"
                     src={images.large[currentImageIndex]}
                     alt="product image" />
@@ -33,6 +49,7 @@ const Product = ({
                                 productID={id}
                                 index={index}
                                 currentImageIndex={currentImageIndex}
+                                images={images}
                             />
                         )
                     }
@@ -103,7 +120,11 @@ const Product = ({
                                         image: images.thumbnails[0]
                                     }
                                 }
-                            })
+                            });
+                            dispatchCart({
+                                type: CartActions.UPDATE_TOTAL_ITEMS,
+                                payload: {}
+                            });
                         }}
                         className="add-to-cart-btn flex gap-4 px-16 py-3 rounded-lg shadow-2xl shadow-primary-orange bg-primary-orange text-white capitalize hover:opacity-75 transition">
                         <CartIcon color={null} />

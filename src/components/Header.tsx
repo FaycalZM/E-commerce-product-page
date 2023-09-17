@@ -30,7 +30,7 @@ const Header = () => {
                         })
                     }}>
                     <div className='bg-primary-orange text-white rounded-lg text-xs absolute w-full -translate-y-2 translate-x-2 z-10'>
-                        {cartData.cartItems.length}
+                        {cartData.totalItems}
                     </div>
                     <CartIcon color={"#69707D"} />
                 </button>

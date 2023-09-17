@@ -26,3 +26,9 @@ svg {
 .add-to-cart-btn>svg {
     fill: white;
 }
+
+.prev-btn:hover>svg,
+.next-btn:hover>svg {
+    stroke: var(--clr-primary-orange);
+    transition: all .15s ease-in;
+}
