@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import { CartContextProviderProps, CartContextType, Cart, ProductType, ProductSliderType } from "../types/Types";
 import CartReducer from "../reducers/CartReducer";
 import data from '../data/data.json'
@@ -38,6 +38,10 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const [cartData, dispatchCart] = useReducer(CartReducer, CartInitialState);
     const [products, dispatchProducts] = useReducer(ProductsReducer, ProductsInitialState);
     const [productSlider, dispatchProductSlider] = useReducer(SliderReducer, ProductSliderInitialState);
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
+    const toggleMenu = () => {
+        setIsMenuOpened(prevState => !prevState);
+    }
     return (
         <CartContext.Provider value={{
             cartData,
@@ -46,6 +50,8 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
             dispatchProducts,
             productSlider,
             dispatchProductSlider,
+            isMenuOpened,
+            toggleMenu,
         }}>
             {children}
         </CartContext.Provider>

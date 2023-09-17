@@ -1,24 +1,23 @@
+import { useCartContext } from "../context/CartContextProvider";
+import Navlink from "./Navlink";
 
+const links = [
+    'Collections',
+    'Men',
+    'Women',
+    'About',
+    'Contact'
+];
 
 const Navbar = () => {
+    const { isMenuOpened } = useCartContext();
     return (
-        <nav className="">
-            <ul className='flex laptop:gap-6 gap-3 font-normal'>
-                <li className="nav-link py-12 text-very-dark-blue text-opacity-75 hover:text-opacity-100 transition">
-                    <a href="#">Collections</a>
-                </li>
-                <li className="nav-link py-12 text-very-dark-blue text-opacity-75 hover:text-opacity-100 transition">
-                    <a href="#">Men</a>
-                </li>
-                <li className="nav-link py-12 text-very-dark-blue text-opacity-75 hover:text-opacity-100 transition">
-                    <a href="#">Women</a>
-                </li>
-                <li className="nav-link py-12 text-very-dark-blue text-opacity-75 hover:text-opacity-100 transition">
-                    <a href="#">About</a>
-                </li>
-                <li className="nav-link py-12 text-very-dark-blue text-opacity-75 hover:text-opacity-100 transition">
-                    <a href="#">Contact</a>
-                </li>
+        <nav className={`tablet:block ${isMenuOpened ? 'block' : 'hidden'} tablet:relative fixed tablet:z-0 z-30 top-0 left-0 tablet:h-fit h-full tablet:w-fit w-full tablet:bg-transparent bg-black bg-opacity-75`}>
+
+            <ul className='flex tablet:flex-row flex-col laptop:gap-6 gap-3 font-normal tablet:bg-transparent bg-white h-full w-3/5 tablet:pt-0 pt-24 tablet:px-0 px-6'>
+                {
+                    links.map((link, index) => <Navlink key={index} path={link} />)
+                }
             </ul>
         </nav>
     )

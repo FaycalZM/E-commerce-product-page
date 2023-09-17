@@ -45,6 +45,8 @@ export type CartContextType = {
     dispatchProducts: React.Dispatch<ProductsAction>;
     productSlider: ProductSliderType;
     dispatchProductSlider: React.Dispatch<ProductSliderAction>;
+    isMenuOpened: boolean;
+    toggleMenu: () => void;
 }
 
 export type CartContextProviderProps = {

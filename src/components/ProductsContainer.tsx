@@ -5,7 +5,7 @@ import { useCartContext } from "../context/CartContextProvider";
 const ProductsContainer = () => {
     const { products } = useCartContext();
     return (
-        <section className="laptop:pt-16 pt-12">
+        <section className="laptop:pt-16 tablet:pt-12">
             {
                 products.length
                     ? products.map((product) => {

@@ -9,7 +9,7 @@ import Logo from '/icons/logo.svg'
 const Header = () => {
     const { cartData, dispatchCart } = useCartContext();
     return (
-        <header className='flex justify-between items-center border-b-[1px] relative '>
+        <header className='flex justify-between items-center border-b-[1px] relative tablet:p-0 pl-16 pr-6 py-3'>
             <div className='flex items-center laptop:gap-16 gap-8'>
                 <a href="/">
                     <img
